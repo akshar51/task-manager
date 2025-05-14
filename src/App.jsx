@@ -4,6 +4,8 @@ const App = () => {
 
   const [task, setTask] = useState({});
   const [list, setList] = useState([]);
+  const [category, setCategory] = useState([]);
+  
   
   const handleChange = (e)=>{
     const {name,value} = e.target;
@@ -15,7 +17,6 @@ const App = () => {
     e.preventDefault()
     const listAdd = [...list,task]
     setList(listAdd)
-    console.log(list)
   }
 
  
@@ -45,10 +46,29 @@ const App = () => {
                         HTML / CSS
                       </span>
 
-                      <span className='btn btn-success text-white fw-semibold w-100 py-3'>BOOTSTRAP</span>
-                      <span className='btn btn-danger text-white fw-semibold w-100 py-3'>JAVASCRIPT</span>
-                      <span className='btn btn-primary text-white fw-semibold w-100 py-3'>REACT</span>
-                      <span className='btn btn-secondary text-white fw-semibold w-100 py-3'>NODE JS</span>
+                      <span
+                      onClick={()=>handleChange({target :{ name:"category" ,value:'BOOTSTRAP'}})} 
+                      className='btn btn-success text-white fw-semibold w-100 py-3'>
+                        BOOTSTRAP
+                      </span>
+
+                      <span
+                      onClick={()=>handleChange({target :{ name:"category" ,value:'JAVASCRIPT'}})} 
+                      className='btn btn-danger text-white fw-semibold w-100 py-3'>
+                        JAVASCRIPT
+                      </span>
+
+                      <span
+                      onClick={()=>handleChange({target :{ name:"category" ,value:'REACT'}})} 
+                      className='btn btn-primary text-white fw-semibold w-100 py-3'>
+                        REACT
+                      </span>
+
+                      <span
+                      onClick={()=>handleChange({target :{ name:"category" ,value:'NODE JS'}})} 
+                      className='btn btn-secondary text-white fw-semibold w-100 py-3'>
+                        NODE JS
+                      </span>
                     </div>
                     <button type="submit" className="btn btn-success mt-3 py-3 px-3 fw-bold">Add Task</button> 
                </form>
@@ -62,7 +82,7 @@ const App = () => {
                       </div>
                       <div className="data-button">
                       <button type="button" className="btn btn-primary position-relative me-2">
-                        Profile
+                        {val.category}
                         <span className="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle">
                           <i className="bi bi-x p-1" />
                         </span>
