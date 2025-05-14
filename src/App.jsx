@@ -10,6 +10,7 @@ const App = () => {
   const handleChange = (e)=>{
     const {name,value} = e.target;
     let taskAdd = {...task,[name]:value}
+    category.push(e.target.value)
     setTask(taskAdd);
   }
 
