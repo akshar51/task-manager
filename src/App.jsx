@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 
 const App = () => {
 
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState({
+    tasks:"",
+    category:[]
+  })
   const [list, setList] = useState([]);
-  const [category, setCategory] = useState([]);
   
-  
+
   const handleChange = (e)=>{
     const {name,value} = e.target;
     let taskAdd = {...task,[name]:value}
-    category.push(e.target.value)
     setTask(taskAdd);
   }
 
@@ -18,8 +19,18 @@ const App = () => {
     e.preventDefault()
     const listAdd = [...list,task]
     setList(listAdd)
+    setTask({
+      tasks:"",
+    category:[]
+    })
   }
 
+  const addCategory = (category)=>{
+    if(!task.category.includes(category)){
+        const newCat = [...task.category,category]
+        setTask({...task,category:newCat})
+    }
+  }
  
 
   return (
@@ -42,31 +53,31 @@ const App = () => {
                     <div className="spanBox d-flex justify-content-between gap-3">
 
                       <span
-                      onClick={()=>handleChange({target :{ name:"category" ,value:'HTML/CSS'}})}
+                      onClick={()=>addCategory()}
                       className='btn btn-warning text-white fw-semibold w-100 py-3'>
                         HTML / CSS
                       </span>
 
                       <span
-                      onClick={()=>handleChange({target :{ name:"category" ,value:'BOOTSTRAP'}})} 
+                      onClick={()=>addCategory(<i className="fa-brands fa-bootstrap text-white"></i>)} 
                       className='btn btn-success text-white fw-semibold w-100 py-3'>
                         BOOTSTRAP
                       </span>
 
                       <span
-                      onClick={()=>handleChange({target :{ name:"category" ,value:'JAVASCRIPT'}})} 
+                      onClick={()=>addCategory(<i className="bi bi-javascript text-warning"></i>)} 
                       className='btn btn-danger text-white fw-semibold w-100 py-3'>
                         JAVASCRIPT
                       </span>
 
                       <span
-                      onClick={()=>handleChange({target :{ name:"category" ,value:'REACT'}})} 
+                      onClick={()=>addCategory(<i className="fa-brands fa-react text-white"></i>)} 
                       className='btn btn-primary text-white fw-semibold w-100 py-3'>
                         REACT
                       </span>
 
                       <span
-                      onClick={()=>handleChange({target :{ name:"category" ,value:'NODE JS'}})} 
+                      onClick={()=>addCategory(<i className="fa-brands fa-node-js text-white"></i>)} 
                       className='btn btn-secondary text-white fw-semibold w-100 py-3'>
                         NODE JS
                       </span>
@@ -82,12 +93,21 @@ const App = () => {
                         <span className=''>{val.tasks}</span>
                       </div>
                       <div className="data-button">
-                      <button type="button" className="btn btn-primary position-relative me-2">
-                        {val.category}
-                        <span className="position-absolute top-0 start-100 translate-middle bg-danger border border-light rounded-circle">
-                          <i className="bi bi-x p-1" />
-                        </span>
-                      </button>
+                        {
+                          val.category.map((item,idx)=>{
+                            return(
+                            <button key={idx} type="button" className="border position-relative mx-2 fs-5 rounded-circle bg-dark px-2 py-1">
+                            {item}
+                            <span className="position-absolute 
+                            top-0 start-100 
+                            translate-middle 
+                            border-light ">
+                              <i className="bi bi-x text-white" />
+                            </span>
+                          </button>
+                            )
+                          })
+                        }
                       </div>
                     </div>
                 )
