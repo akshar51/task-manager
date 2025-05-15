@@ -31,6 +31,10 @@ const App = () => {
         setTask({...task,category:newCat})
     }
   }
+
+  const handleDelete = (listId,catId)=>{
+    
+  }
  
 
   return (
@@ -94,15 +98,17 @@ const App = () => {
                       </div>
                       <div className="data-button">
                         {
-                          val.category.map((item,idx)=>{
+                          val.category.map((item,indx)=>{
                             return(
-                            <button key={idx} type="button" className="border position-relative mx-2 fs-5 rounded-circle bg-dark px-2 py-1">
+                            <button key={indx} type="button" className="border position-relative mx-2 fs-5 rounded-circle bg-dark px-2 py-1">
                             {item}
                             <span className="position-absolute 
                             top-0 start-100 
                             translate-middle 
                             border-light ">
-                              <i className="bi bi-x text-white" />
+                              <i 
+                              className="bi bi-x text-white" 
+                              onClick={()=>handleDelete(idx,indx)}/>
                             </span>
                           </button>
                             )
